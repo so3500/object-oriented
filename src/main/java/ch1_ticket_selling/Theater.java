@@ -1,3 +1,5 @@
+package ch1_ticket_selling;
+
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
