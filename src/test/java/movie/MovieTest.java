@@ -1,16 +1,23 @@
 package movie;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalTime;
 
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class MovieTest {
+    private static Movie avatar;
+    private static Movie titanic;
+    private static Movie starWars;
+
     @BeforeClass
     public static void createMovie() {
         // 아바타, 고정금액(800원) 할인 정책
-        Movie avatar = new Movie(
+        avatar = new Movie(
                 "아바타",
                 Duration.ofMinutes(120),
                 Money.wons(10000),
@@ -28,7 +35,7 @@ public class MovieTest {
         );
 
         // 타이타닉, 비율금액(10%) 할인 정책
-        Movie titanic = new Movie(
+        titanic = new Movie(
                 "타이타닉",
                 Duration.ofMinutes(180),
                 Money.wons(11000),
@@ -43,5 +50,20 @@ public class MovieTest {
                         )
                 )
         );
+
+        // 스타워즈, No 할인정책
+        starWars = new Movie(
+                "스타워즈",
+                Duration.ofMinutes(210),
+                Money.wons(10000),
+                new NoneDiscountPolicy()
+        );
+    }
+
+    @Test
+    public void run() {
+        assertThat(avatar).isNotNull();
+        assertThat(titanic).isNotNull();
+        assertThat(starWars).isNotNull();
     }
 }
